@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>라멘 콜라보 관리자 대시보드</title>
+</head>
+<body>
+<h1>🍜 라멘 콜라보 응모 관리자 페이지</h1>
+
+<!-- 당첨자 결과 영역 -->
+<div th:if="${winner != null}" style="background-color: #fffae6; padding: 15px; border: 1px solid #ffd700; margin-bottom: 20px;">
+  <h2>🎉 축하합니다! 당첨자 발표 🎉</h2>
+  <p><strong>이름:</strong> <span th:text="${winner.name}">이름</span></p>
+  <p><strong>전화번호:</strong> <span th:text="${winner.phone}">전화번호</span></p>
+  <p><strong>이메일:</strong> <span th:text="${winner.mail}">이메일</span></p>
+</div>
+
+<!-- 에러 메시지 -->
+<p th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></p>
+
+<!-- 추첨 버튼 -->
+<form th:action="@{/admin/draw}" method="post">
+  <button type="submit" style="padding: 10px 20px; font-size: 16px; background-color: #ff4500; color: white; border: none; cursor: pointer;">
+    당첨자 추첨하기 🎲
+  </button>
+</form>
+
+<hr style="margin: 20px 0;">
+
+<h3>전체 응모자 명단 (총 <span th:text="${#lists.size(applicants)}">0</span>명)</h3>
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>이름</th>
+    <th>전화번호</th>
+    <th>이메일</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="applicant : ${applicants}">
+    <td th:text="${applicant.id}">1</td>
+    <td th:text="${applicant.name}">홍길동</td>
+    <td th:text="${applicant.phone}">010-0000-0000</td>
+    <td th:text="${applicant.mail}">test@test.com</td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
