@@ -23,12 +23,15 @@ Tools: Git, GitHub, IntelliJ IDEA, Gradle
 3) 동시성 제어 테스트: 프로그램 구현 이전 서비스 테스트에서 @DisplayName를 통해 같은 번호로
    10명이 응모하더라도 1명만 성공하게끔 예외를 처리함.
 
-5. 아키텍처 및 데이터 흐름 (Architecture)
+4. 아키텍처 및 데이터 흐름 (Architecture)
 Layered Architecture (계층형 구조) 적용
 Controller ➔ Service ➔ Repository ➔ Database 순으로 관심사 분리(Separation of Concerns)를 고려하여 설계함.
+각각의 역할로는 Entity(data)에서 기본적으로 응모에 필요한 이름, 번호, 메일주소를 입력하기 위한 필드를 설정.
+Service에서는 1차적으로 데이터를 받아 중복 여부를 체크하고, 2차적으로 db차원에서의 검증 및 차단을 실행.
+Controller에서는 사용자에게 응모 페이지와 처리, 결과 등을 출력할 수 있게끔 웹과 코드의 매게역할을 부여.
+Repository에서는 데이터를 필요에 따라 접근하게 하였음.
 
-
-6. 트러블슈팅 및 배운 점 (Troubleshooting)
+5. 트러블슈팅 및 배운 점 (Troubleshooting)
    배경: 프로젝트를 시작한 이유는 라멘가게 콜라보이벤트가 회원가입이나 로그인 없이
    이름과 전화번호 메일, 주소만 입력하고 버튼 클릭 한 번으로 응모하는 시스템이었음.
    이러한 경우 몇 번이고 응모를 할 수 있다는 점을 깨닫고 이는 곧 되팔이들의 타겟이 될 수 있다 느꼈음.
