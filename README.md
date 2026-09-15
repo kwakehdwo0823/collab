@@ -1,29 +1,31 @@
-1. 프로젝트 개요 (Overview)
+##1. 프로젝트 개요 (Overview)
 프로젝트명: 콜라보레이션 응모 및 추첨 시스템(Collab Project)
 개발 기간: (예: 2026.09 ~ 2026.09) / 개인 프로젝트 (1인)
 프로젝트 소개:
 라멘가게와 아니메 콜라보 이벤트를 참여한 적이 있었는데 단순히 이름 주소 전화번호를 적고 응모하면 됐지만, 응모를 하고도 불확실해 다시 응모하니 접수가 되었음. 이 때 경험을 통해 중복 응모를 차단할 방법을 고민해 시작함.
 
-2. 기술 스택 (Tech Stack)
+##2. 기술 스택 (Tech Stack)
 Backend: Java 17+, Spring Boot, Spring Data JPA
 Frontend: Thymeleaf, HTML5, CSS
 Database: H2 Database (In-Memory DB)
 Tools: Git, GitHub, IntelliJ IDEA, Gradle
 
-3. 핵심 기능 (Key Features)
+##3. 핵심 기능 (Key Features)
 1)예외처리: 개인이 몇 번이고 응모를 진행할 경우 転売屋로 인한 피해가 예상되기에 이를 차단할
    방식이 필요하다 생각했음. 따라서 IllegalArgumentException을 발생시켜 한 번 입력된
    전화번호로는 두 번 이상 응모할 수 없게 차단함.
    특히 전화번호는 @Column을 통해 DB레벨에서 차단하게끔 설정하였음
+
    
 2)유효성 검증: 신원정보가 확실해야 추첨 등에 있어서도 지장이 없기에 정보 입력에 제약을 두었음.
    데이터레벨에서 이름, 전화번호, 메일 형식을 지정하고 @Valid를 통해 유효하지 않으면 경고문구가
    떠오르게 설정함.
 
+
 3) 동시성 제어 테스트: 프로그램 구현 이전 서비스 테스트에서 @DisplayName를 통해 같은 번호로
    10명이 응모하더라도 1명만 성공하게끔 예외를 처리함.
 
-4. 아키텍처 및 데이터 흐름 (Architecture)
+##4. 아키텍처 및 데이터 흐름 (Architecture)
 Layered Architecture (계층형 구조) 적용
 Controller ➔ Service ➔ Repository ➔ Database 순으로 관심사 분리(Separation of Concerns)를 고려하여 설계함.
 각각의 역할로는 Entity(data)에서 기본적으로 응모에 필요한 이름, 번호, 메일주소를 입력하기 위한 필드를 설정.
@@ -31,7 +33,7 @@ Service에서는 1차적으로 데이터를 받아 중복 여부를 체크하고
 Controller에서는 사용자에게 응모 페이지와 처리, 결과 등을 출력할 수 있게끔 웹과 코드의 매게역할을 부여.
 Repository에서는 데이터를 필요에 따라 접근하게 하였음.
 
-5. 트러블슈팅 및 배운 점 (Troubleshooting)
+##5. 트러블슈팅 및 배운 점 (Troubleshooting)
    배경: 프로젝트를 시작한 이유는 라멘가게 콜라보이벤트가 회원가입이나 로그인 없이
    이름과 전화번호 메일, 주소만 입력하고 버튼 클릭 한 번으로 응모하는 시스템이었음.
    이러한 경우 몇 번이고 응모를 할 수 있다는 점을 깨닫고 이는 곧 되팔이들의 타겟이 될 수 있다 느꼈음.
