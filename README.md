@@ -25,6 +25,10 @@
 ## 4. 아키텍처 및 데이터 흐름 (Architecture)
 * **Layered Architecture (계층형 구조)** 적용
   * `Controller` ➔ `Service` ➔ `Repository` ➔ `Database` 순으로 관심사 분리(Separation of Concerns)를 고려하여 설계함.
+  * 각각의 역할로는 Entity(data)에서 기본적으로 응모에 필요한 이름, 번호, 메일주소를 입력하기 위한 필드를 설정.
+Service에서는 1차적으로 데이터를 받아 중복 여부를 체크하고, 2차적으로 db차원에서의 검증 및 차단을 실행.
+Controller에서는 사용자에게 응모 페이지와 처리, 결과 등을 출력할 수 있게끔 웹과 코드의 매게역할을 부여.
+Repository에서는 데이터를 필요에 따라 접근하게 하였음.
 
 ## 5. 트러블슈팅 및 배운 점 (Troubleshooting)
 * **[배경]**: 라멘가게 콜라보 이벤트 등에서 로그인 없이 번호 입력만으로 응모가 가능할 때, 수차례 중복 응모가 가능해져 리셀러들의 타겟이 된다는 점을 체감함.
