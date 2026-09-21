@@ -18,7 +18,7 @@
 ## 2. 技術スタック
 
 ### Backend
-- Java 17
+- Java 25
 - Spring Boot
 - Spring Data JPA
 
